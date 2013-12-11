@@ -1,5 +1,29 @@
-:-use_module(library(clpfd)).
-:-use_module(library(lists)).
+
+
+
+kenken(B, N) :-
+    % Build square board
+    length(Board, N),
+    buildBoard(Board, N),
+
+    % Build unified list
+    append(Board, UniBoard), % mete todos os elementos do board numa só lista
+
+    % SETUP Domain of each number
+    domain(UniBoard, 1, N), %todos os elementos têm que ser números de 1 a 9
+
+    % SETUP each row different
+    setupDifferent(B),
+
+    % SETUP each column different
+    transpose(Board, TBoard),
+    setupDifferent(TBoard),
+
+    % SETUP groups
+    setupGroups(Board, Problem),
+
+    labeling([], R).
+
 % create
 
 buildBoard([], N).
@@ -8,24 +32,22 @@ buildBoard([H|T], N):-
 	buildBoard(T,N).
 
 
-setupUnifiedList([], []).
-setupUnifiedList([H|T], R):-
-	setupUnifiedList(T, R1),
-	append(H, R1, R).
+%setupUnifiedList([], []).
+%setupUnifiedList([H|T], R):-
+%	setupUnifiedList(T, R1),
+%	append(H, R1, R).
 
 setupDifferent([]).
 setupDifferent([H|T]):-
 	all_distinct(H),
 	setupDifferent(T).
 
+setupGroups(Board, []). % TODO
+setupGroups(Board, [[Result, Spaces] | T]) :-
+    length(Spaces, Length),
+    Length =:= 2, % TODO - Ver operador
 
-kenken(B, N) :-
-	length(B, N),
-	buildBoard(B, N),
-	setupUnifiedList(B, R), %mete todos os elementos do board numa só lista
-	domain(R, 1, N), %todos os elementos têm que ser números de 1 a 9
-	setupDifferent(B), %mete as colunas com numeros diferentes
-	transpose(B, NB), %faz a transposta para agora mexer nas linhas
-	setupDifferent(NB), %linhas com números todos diferentes
-	setupUnifiedList(B, R1), %volta a juntar tudo para o labeling
-	labeling([], R1).
+
+getElement(Board, RowNumber, ColumnNumber, Value) :-
+    nth1(RowNumber, Board, Row),
+    element(ColumnNumber, Row, Value).

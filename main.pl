@@ -1,7 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Includes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-:-  consult(utilities),
-    consult(board),
-    consult(kenken),
-    consult(ai),
-    play.
+:-use_module(library(clpfd)).
+:-use_module(library(lists)).
+:-consult(board).
