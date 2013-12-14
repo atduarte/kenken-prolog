@@ -1,9 +1,150 @@
-getProblem(N, Problem) :-
+% ===================================================
+% =============== Generator =====================
+% ===================================================
+
+getProblem(0, N, Problem) :-
     getRandomBoard(N, Board),
     getCages(N, Cages),
-    write('Gerado'), nl,
-    getProblemAux(Board, Cages, Problem),
-    write('Compilado'),nl.
+    getProblemAux(Board, Cages, Problem).
+
+
+% ===================================================
+% ================= Generated =======================
+% ===================================================
+
+%[2,1]
+%[1,2]
+
+getProblem(1, 2, [
+    [4,[[1,1],[1,2]],2],
+    [1,[[2,1],[2,2]],3]
+]).
+
+%[2,1,3]
+%[1,3,2]
+%[3,2,1]
+
+getProblem(1, 3, [
+    [4,[[1,1],[1,2]],2],
+    [1,[[1,3],[2,3],[2,2]],8],
+    [1,[[2,1],[3,1],[3,2]],6],
+    [2,[[3,3]],1]
+]).
+
+%[2,3,1,4]
+%[3,1,4,2]
+%[1,4,2,3]
+%[4,2,3,1]
+
+getProblem(1, 4, [
+    [1,[[1,1],[1,2],[2,2]],6],
+    [2,[[1,3],[2,3],[3,3]],8],
+    [1,[[1,4],[2,4],[3,4]],9],
+    [1,[[2,1],[3,1],[4,1]],8],
+    [2,[[3,2],[4,2],[4,3],[4,4]],24]
+]).
+
+%[4,1,2,3,5]
+%[2,4,5,1,3]
+%[1,5,3,4,2]
+%[5,3,1,2,4]
+%[3,2,4,5,1]
+
+getProblem(1, 5, [
+    [1,[[1,1],[1,2],[1,3]],7],
+    [1,[[1,4],[2,4],[2,3]],9],
+    [1,[[1,5],[2,5],[3,5]],10],
+    [3,[[2,1],[3,1]],1],
+    [1,[[2,2],[3,2],[4,2],[4,3]],13],
+    [2,[[3,3],[3,4],[4,4],[4,5],[5,5]],96],
+    [2,[[4,1],[5,1],[5,2],[5,3],[5,4]],600]
+]).
+
+%[5,2,1,3,6,4]
+%[2,1,3,6,4,5]
+%[1,6,2,4,5,3]
+%[4,5,6,2,3,1]
+%[6,3,4,5,1,2]
+%[3,4,5,1,2,6]
+
+getProblem(1, 6, [
+    [1,[[1,1],[2,1],[3,1]],8],
+    [2,[[1,2],[2,2],[2,3],[3,3],[3,2]],72],
+    [1,[[1,3],[1,4],[2,4]],10],
+    [2,[[1,5],[1,6],[2,6],[3,6],[4,6],[4,5]],1080],
+    [1,[[2,5],[3,5],[3,4],[4,4]],15],
+    [2,[[4,1],[5,1],[5,2],[6,2]],288],
+    [2,[[4,2],[4,3],[5,3],[6,3]],600],
+    [1,[[5,4],[6,4],[6,5],[5,5],[5,6],[6,6]],17],
+    [1,[[6,1]],3]
+]).
+
+% [1 3 2 4 5 6 7]
+% [3 2 1 5 4 7 6]
+% [2 1 5 6 7 3 4]
+% [4 5 6 7 1 2 3]
+% [6 4 7 2 3 5 1]
+% [5 7 4 3 6 1 2]
+% [7 6 3 1 2 4 5]
+
+getProblem(1, 7, [
+    [2,[[1,1],[2,1],[3,1],[4,1],[5,1],[6,1]],720],
+    [2,[[1,2],[2,2]],6],
+    [2,[[1,3],[2,3],[2,4]],10],
+    [3,[[1,4],[1,5]],-1],
+    [2,[[1,6],[1,7],[2,7],[3,7],[4,7]],3024],
+    [1,[[2,5],[3,5],[4,5],[4,4],[3,4],[3,3]],30],
+    [2,[[2,6],[3,6],[4,6],[5,6]],210],
+    [2,[[3,2],[4,2],[5,2],[5,3],[4,3]],840],
+    [1,[[5,4],[5,5],[6,5],[6,6],[7,6]],16],
+    [1,[[5,7],[6,7],[7,7]],8],
+    [2,[[6,2],[6,3],[6,4]],84],
+    [2,[[7,1],[7,2],[7,3],[7,4],[7,5]],252]
+]).
+
+%[5,1,2,3,4,6,7,8]
+%[1,6,3,2,5,4,8,7]
+%[2,3,8,4,1,7,5,6]
+%[3,2,7,1,6,8,4,5]
+%[4,5,6,8,7,1,2,3]
+%[6,4,5,7,8,2,3,1]
+%[7,8,1,5,2,3,6,4]
+%[8,7,4,6,3,5,1,2]
+
+% ou
+
+%[1,4,8,2,5,6,7,3]
+%[2,6,3,1,4,5,8,7]
+%[5,3,2,8,1,7,4,6]
+%[3,7,6,4,2,8,1,5]
+%[4,5,1,6,7,3,2,8]
+%[6,1,5,7,8,4,3,2]
+%[7,8,4,3,6,2,5,1]
+%[8,2,7,5,3,1,6,4]
+
+
+getProblem(1, 8, [
+    [1,[[1,1],[2,1],[2,2],[1,2]],13],
+    [2,[[1,3],[2,3],[3,3],[3,4],[2,4]],384],
+    [1,[[1,4],[1,5],[1,6]],13],
+    [2,[[1,7],[1,8],[2,8],[3,8],[4,8],[5,8]],35280],
+    [2,[[2,5],[2,6]],20],
+    [1,[[2,7],[3,7],[3,6],[4,6],[4,7],[5,7],[5,6],[6,6]],37],
+    [1,[[3,1],[4,1],[5,1],[6,1],[6,2]],19],
+    [2,[[3,2],[4,2],[4,3],[5,3],[6,3],[7,3],[8,3],[8,2]],35280],
+    [2,[[3,5],[4,5],[4,4],[5,4],[6,4],[6,5]],2688],
+    [1,[[5,2]],5],
+    [1,[[5,5]],7],
+    [2,[[6,7],[6,8],[7,8],[8,8]],24],
+    [1,[[7,1],[8,1]],15],
+    [2,[[7,2]],8],
+    [2,[[7,4],[8,4],[8,5],[8,6],[8,7],[7,7],[7,6],[7,5]],16200]
+]).
+
+
+% ===================================================
+% ================= AUXILIARY =======================
+% ===================================================
 
 getProblemAux(Board, [], []).
 getProblemAux(Board, [H|T], [H1|T1]) :-
@@ -53,19 +194,14 @@ getRandomBoard(N, Board) :-
     % Build square board
     length(Board, N),
     buildBoard(Board, N),
-
     % Build unified list
     append(Board, UniBoard), % mete todos os elementos do board numa só lista
-
     % SETUP Domain of each number
     domain(UniBoard, 1, N), %todos os elementos têm que ser números de 1 a 9
-
     % FILL diagonal of board with random numbers
     fillDiag(Board),
-
     % SETUP each row different
     setupDifferent(Board),
-
     % SETUP each column different
     transpose(Board, TBoard),
     setupDifferent(TBoard),
@@ -82,6 +218,8 @@ fillDiag(Board) :-
             getElement(Board, In, In, Value),
             Out is In+1
         )).
+fillDiag(Board) :-
+    fillDiag(Board).
 
 getCages(N, Cages) :-
     length(Board, N),
@@ -96,8 +234,6 @@ getCages(Board, Cages, Cages):-
     Lin = 0.
 getCages(Board, Cages, RCages):-
     findFreeElement(Board, Lin, Col),
-    %write(Lin),nl,
-    %write(Col),
     Lin > 0,
     Col > 0,
     changeElement(1, Board, NBoard, Lin, Col),
@@ -108,30 +244,6 @@ getCages(Board, Cages, RCages):-
     append(Cages, [RCage], NCages),
     getCages(NNBoard, NCages, RCages).
 
-changeElement(P, B, B1, L, C) :-
-    changeElementAuxLine(P, B, B1, C, L, 1, 1).
-
-changeElementAuxLine(P, [], [], C, L, NL, NC).
-changeElementAuxLine(P, [H|T], [H|T1], C, L, NL, NC) :-
-    NL \= L,
-    NL1 is NL + 1,
-    changeElementAuxLine(P, T, T1, C, L, NL1, NC).
-changeElementAuxLine(P, [H|T], [H1|T1], C, L, NL, NC) :-
-    NL = L,
-    changeElementAuxColumn(P, H, H1, C, L, NC, NL),
-    NL1 is NL + 1,
-    changeElementAuxLine(P, T, T1, C, L, NL1, NC).
-
-changeElementAuxColumn(P, [], [], C, L, NC, NL).
-changeElementAuxColumn(P, [H|T], [H|T1], C, L, NC, NL) :-
-    NC \= C,
-    NC1 is NC + 1,
-    changeElementAuxColumn(P, T, T1, C, L, NC1, NL).
-changeElementAuxColumn(P, [H|T], [P|T1], C, L, NC, NL) :-
-    NC = C,
-    NC1 is NC + 1,
-    changeElementAuxColumn(P, T, T1, C, L, NC1, NL).
-
 findFreeElement(Board, Lin, Col) :-
     append(Board, UniBoard),
     length(Board, N),
@@ -139,18 +251,11 @@ findFreeElement(Board, Lin, Col) :-
     Lin is ceiling(R/N),
     mod(R, N, Col).
 
-mod(N, D, D) :-
-    X is N mod D,
-    X =:= 0, !.
-mod(N, D, Result) :-
-    Result is N mod D.
-
 search([], I, 0).
 search([0|T], I, I) :- !.
 search([H|T], I, R) :-
     I1 is I+1,
     search(T, I1, R).
-
 
 getNextPoint(Board, Lin, Col, 0, 0, []).
 getNextPoint(Board, Lin, Col, NLin, NCol, [1 | T]) :-
@@ -183,18 +288,6 @@ getNextPoint(Board, Lin, Col, NLin, NCol, [H | T]) :-
     % Falhou
     getNextPoint(Board, Lin, Col, NLin, NCol, T).
 
-shuffleList(List, ResultList) :-
-    shuffleList(List, [], ResultList).
-shuffleList([], TList, TList).
-shuffleList(List, TList, ResultList) :-
-    length(List, N),
-    N1 is N+1,
-    random(1, N1, P),
-    element(P, List, Value),
-    delete(List, Value, NList),
-    append(TList, [Value], NTList),
-    shuffleList(NList, NTList, ResultList).
-
 buildPathFromPoint(Board, Board, Lin, Col, Cage, NewCage, N, N) :-
     append(Cage, [[Lin, Col]], NewCage), !.
 buildPathFromPoint(Board, Board, Lin, Col, Cage, NewCage, N, Max) :-
@@ -210,30 +303,5 @@ buildPathFromPoint(Board, FBoard, Lin, Col, Cage, RCage, N, Max):-
     NLin > 0,
     NCol > 0,
     changeElement(1, Board, NBoard, NLin, NCol),
-    print(NLin), write(NCol), nl,
     N1 is N+1,
     buildPathFromPoint(NBoard, FBoard, NLin, NCol, NewCage, RCage, N1, Max).
-
-
-
-
-%checkSum([], X, R):-
-%	X = R.
-%
-%checkSum([H|T], X, R):-
-%	X1 = X + H,
-%	checkSum(T, X, R).
-%
-%checkMult([H|T], X, R):-
-%	X1 = X * H,
-%	checkMult(T, X, R).
-%
-%checkDiv([H|T], X, R):-
-%	X1 = X / H,
-%	checkDiv(T, X, R).
-%
-%checkSub([H|T], X, R):-
-%	X1 = X - H,
-%	checkSub(T, X, R).
-%
-%

@@ -1,16 +1,33 @@
 kenken(N) :-
+    kenken(1, N).
+
+% T = 0 -> Problem Generator
+% T = 1 -> Generated Problems
+
+kenken(T, N) :-
     % Build square board
     length(Board, N),
     buildBoard(Board, N),
 
     % Problem Generate
-    getProblem(N, Problem),
+    getProblem(T, N, Problem), !,
+
+    write('Problem:'), nl,
+    ( foreach(Row,Problem)
+    do
+      [OpNumber, Spaces, Result] = Row,
+      opSymbol(OpNumber, Op),
+      append([], [Op, Spaces, Result], RowMod),
+      write(RowMod),nl
+    ),nl,!,
+
+    now(StartTime),
 
     % Build unified list
     append(Board, UniBoard), % mete todos os elementos do board numa só lista
 
     % SETUP Domain of each number
-    domain(UniBoard, 1, N), %todos os elementos têm que ser números de 1 a 9
+    domain(UniBoard, 1, N), % todos os elementos têm que ser números de 1 a 9
 
     % SETUP each row different
     setupDifferent(Board),
@@ -19,8 +36,6 @@ kenken(N) :-
     transpose(Board, TBoard),
     setupDifferent(TBoard),
 
-    write('Diferentes'),nl,
-
     % SETUP groups
     ( foreach(P,Problem),
       param(Board)
@@ -28,32 +43,26 @@ kenken(N) :-
         setupGroup(Board, P)
     ),
 
-    write('Setupped'),nl,
-
     % Get Result
-    labeling([], UniBoard),
+    labeling([bisect], UniBoard), !,
+
+    now(EndTime),
+
+    ExecutionTime is EndTime - StartTime,
 
     % Aux Print
+    write('Resolution:'), nl,
     ( foreach(Row,Board)
     do
       write(Row),nl
-    ).
+    ),nl,
 
-problem(6, [
-            [1, [[1,1]], 5],
-            [1, [[2,1]], 6],
-            [4, [[1,2], [1,3]],  2],
-            [2, [[1,4], [2,4]], 20],
-            [2, [[1,5], [1,6], [2,6], [3,6]],  6],
-            [3, [[2,2], [2,3]],  3],
-            [4, [[2,5], [3,5]],  3],
-            [2, [[3,1], [3,2], [4,1], [4,2]],240],
-            [2, [[3,3], [3,4]],  6],
-            [2, [[4,3], [5,3]],  6],
-            [1, [[4,4], [5,4], [5,5]],  7],
-            [2, [[4,5], [4,6]], 30],
-            [2, [[5,1], [5,2]],  6],
-            [1, [[5,6], [6,6]],  9],
-            [1, [[6,1], [6,2], [6,3]],  8],
-            [4, [[6,4], [6,5]],  2]
-           ]).
+    write('Statistics: '), nl,
+    write('Execution time: '), write(ExecutionTime), write(' seconds'),nl,
+    fd_statistics,
+    nl.
+
+opSymbol(1, '+').
+opSymbol(2, '*').
+opSymbol(3, '-').
+opSymbol(4, '/').
